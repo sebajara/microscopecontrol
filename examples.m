@@ -1,5 +1,3 @@
-addpath(genpath('./src/'));
-
 %% =============== INITIALIZE =====================
 
 % Have devices as global variables, makes things easier when using functions
@@ -91,7 +89,7 @@ img = flipdim(rot90(reshape(typecast(mmc.getImage,'uint16'), [mmc.getImageWidth,
 % show it on a figure
 figure(); imshow(img,[]);
 
-% Taking fluorescence snapshot in mCherry
+%% Taking fluorescence snapshot in mCherry
 filter = '5-TRITC';
 illumination = 'Green';
 % set imaging parameters
@@ -108,7 +106,7 @@ img = flipdim(rot90(reshape(typecast(mmc.getImage,'uint16'), [mmc.getImageWidth,
 % show it on a figure
 figure(); imshow(img,[]);
 
-% Taking fluorescence snapshot in DAPI
+%% Taking fluorescence snapshot in DAPI
 filter = '1-DAPI';
 illumination = 'Violet';
 % ....
@@ -135,7 +133,6 @@ for iDEV = [0:devices.size-1]
         specs.([devname,'_',removestructnonchars(s)]) = char(v);
     end
 end
-
 
 %% Saving an image
 folder   = 'OUTPUT/';
@@ -196,7 +193,6 @@ livecontrol = uicontrol(fig,'Style','pushbutton',...
 
 %% =============== XY scan example =====================
 
-
 x1 = mmc.getXPosition('XYStage');  % min X
 y1 = mmc.getYPosition('XYStage');  % max X
 x2 = x1+8000;  % min Y
@@ -242,13 +238,13 @@ end
 % adjust slightly the axis edges
 axis([x1-100,x2+100,y1-100,y2+100]);
 
-outfolder = '.\OUTPUT\20190516_test5\';
+outfolder = '.\OUTPUT\test\';
 if(exist(outfolder,'dir'))
     display('Abort! a folder with that prefix already exists');
 else
     mkdir(outfolder);
 end
-prefix  = '20190516_test5';
+prefix  = 'test';
 chanels = {'Brighfield','mCherry','GFP'};
 extimes = [20,100,80]; % in msec
 gains   = [5,5,5];    % minimal gain
